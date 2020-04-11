@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript">
+    var APIKey = "XlBR3viVn8RGIGcXwVQc7sYBJPFg1PwnPeLNVO9eXBty1nYguo";
+    var secret = "zgMOcpFX72jNbDYwW7WWY1WPrvnuouonOXjXGBfc"
+    var token = $.ajax({
+      url: `https://cors-anywhere.herokuapp.com/https://api.petfinder.com/v2/oauth2/token/grant_type=client_credentials&client_id=${APIKey}&client_secret=${secret}`,
+      method: "GET",
+      dataType: "json",
+      // this headers section is necessary for CORS-anywhere
+      headers: {
+        "x-requested-with": "xhr" 
+      }
+    }).done(function(response) {
+      console.log('Token', response);
+    }).fail(function(jqXHR, textStatus) { 
+      console.error(textStatus)
+    })
+    var originalURL = "http://api.petfinder.com/my.method?key=" + APIKey;
+    var queryURL = "https://cors-anywhere.herokuapp.com/" + originalURL
+//curl -d "grant_type=client_credentials&client_id={CLIENT-ID}&client_secret={CLIENT-SECRET}" https://api.petfinder.com/v2/oauth2/token
+//curl -H "Authorization: Bearer {YOUR_ACCESS_TOKEN}" GET https://api.petfinder.com/v2/{CATEGORY}/{ACTION}?{parameter_1}={value_1}&{parameter_2}={value_2}
+
+
+    $.ajax({
+      url: queryURL,
+      method: "GET",
+      dataType: "json",
+      // this headers section is necessary for CORS-anywhere
+      headers: {
+        "x-requested-with": "xhr" 
+      }
+    }).done(function(response) {
+      console.log('CORS anywhere response', response);
+    }).fail(function(jqXHR, textStatus) { 
+      console.error(textStatus)
+    })
+    </script>
+</body>
+</html>
