@@ -16,9 +16,6 @@
       method: "GET",
       dataType: "json",
       // this headers section is necessary for CORS-anywhere
-      headers: {
-        "x-requested-with": "xhr" 
-      }
     }).done(function(response) {
       console.log('Tokentwo', response);
     }).fail(function(jqXHR, textStatus) { 
