@@ -26,10 +26,23 @@
           //   Make sure the variables you want to use are actually in scope at the time you want to use them
           let authResponse = await response.json();
           let accessToken = authResponse.access_token;
+          console.log(response)
         })
         .catch((error) => {
           console.error(error);
         });
+
+        $.ajax({
+          url: "https://api.petfinder.com/v2/animals?type=dog&page=2",
+          method: "GET",
+          headers: {
+            "Access-Control-Allow-Origin": "*"
+          }
+        }).then(function(response){
+          console.log(response)
+        })
+
+        
     </script>
   </body>
 </html>
