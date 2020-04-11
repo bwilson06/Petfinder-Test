@@ -15,6 +15,9 @@
       url: `https://api.petfinder.com/v2/oauth2/token/grant_type=client_credentials&client_id=${APIKey}&client_secret=${secret}`,
       method: "GET",
       dataType: "json",
+        headers: {
+        "Access-Control-Allow-Origin": "*"
+      }
       // this headers section is necessary for CORS-anywhere
     }).done(function(response) {
       console.log('Tokentwo', response);
