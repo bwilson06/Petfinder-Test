@@ -12,7 +12,7 @@
     var APIKey = "XlBR3viVn8RGIGcXwVQc7sYBJPFg1PwnPeLNVO9eXBty1nYguo";
     var secret = "zgMOcpFX72jNbDYwW7WWY1WPrvnuouonOXjXGBfc"
     var token = $.ajax({
-      url: `https://cors-anywhere.herokuapp.com/https://api.petfinder.com/v2/oauth2/token/grant_type=client_credentials&client_id=${APIKey}&client_secret=${secret}`,
+      url: `https://api.petfinder.com/v2/oauth2/token/grant_type=client_credentials&client_id=${APIKey}&client_secret=${secret}`,
       method: "GET",
       dataType: "json",
       // this headers section is necessary for CORS-anywhere
@@ -20,7 +20,7 @@
         "x-requested-with": "xhr" 
       }
     }).done(function(response) {
-      console.log('Token', response);
+      console.log('Tokentwo', response);
     }).fail(function(jqXHR, textStatus) { 
       console.error(textStatus)
     })
