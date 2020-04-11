@@ -33,8 +33,12 @@
         });
 
         $.ajax({
-          url: "https://api.petfinder.com/v2/animals?key=XlBR3viVn8RGIGcXwVQc7sYBJPFg1PwnPeLNVO9eXBty1nYguo&type=dog&page=2",
+          url: "https://cors-anywhere.herokuapp.com/https://api.petfinder.com/v2/animals?key=XlBR3viVn8RGIGcXwVQc7sYBJPFg1PwnPeLNVO9eXBty1nYguo&type=dog&page=2",
           method: "GET",
+          headers: {
+        "Access-Control-Allow-Origin": "*"
+        
+      }
           
         }).then(function(response){
           console.log(response)
