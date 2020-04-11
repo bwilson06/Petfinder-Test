@@ -20,6 +20,9 @@
       fetch(queryURL, {
         method: "POST",
         body: form,
+        headers: {
+          "Access-Control-Allow-Origin": "*"
+        }
       })
         .then(async (response) => {
           // Investigate arrow functions AND aysnc await make sure your team understands
