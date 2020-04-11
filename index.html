@@ -12,29 +12,53 @@
       var APIKey = "XlBR3viVn8RGIGcXwVQc7sYBJPFg1PwnPeLNVO9eXBty1nYguo";
       var secret = "zgMOcpFX72jNbDYwW7WWY1WPrvnuouonOXjXGBfc";
       var queryURL = "https://api.petfinder.com/v2/oauth2/token";
+      var org = 'RI77';
+      var status = 'adoptable'; 
       
-      var form = new FormData();
-      form.append("grant_type", "client_credentials");
-      form.append("client_id", APIKey);
-      form.append("client_secret", secret);
-      fetch(queryURL, {
-        method: "POST",
-        body: form,
-      })
-        .then(async (response) => {
-          // Investigate arrow functions AND aysnc await make sure your team understands
-          //   Make sure the variables you want to use are actually in scope at the time you want to use them
-          let authResponse = await response.json();
-          let accessToken = authResponse.access_token;
-          console.log(accessToken)
-        })
-        .catch((error) => {
-          console.error(error);
-        });
+      fetch('https://api.petfinder.com/v2/oauth2/token', {
+	method: 'POST',
+	body: 'grant_type=client_credentials&client_id=' + APIKey + '&client_secret=' + secret,
+	headers: {
+		'Content-Type': 'application/x-www-form-urlencoded'
+	}
+}).then(function (resp) {
 
-       
+	// Return the response as JSON
+	return resp.json();
+
+}).then(function (data) {
+
+	// Log the API data
+	console.log('token', data);
+
+	// Return a second API call
+	// This one uses the token we received for authentication
+	return fetch('https://api.petfinder.com/v2/animals?organization=' + org + '&status=' + status, {
+		headers: {
+			'Authorization': data.token_type + ' ' + data.access_token,
+			'Content-Type': 'application/x-www-form-urlencoded'
+		}
+	});
+
+}).then(function (resp) {
+
+	// Return the API response as JSON
+	return resp.json();
+
+}).then(function (data) {
+
+	// Log the pet data
+	console.log('pets', data);
+
+}).catch(function (err) {
+
+	// Log any errors
+	console.log('something went wrong', err);
+
+});
 
         
     </script>
   </body>
 </html>
+
