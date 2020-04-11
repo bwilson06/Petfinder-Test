@@ -26,23 +26,13 @@
           //   Make sure the variables you want to use are actually in scope at the time you want to use them
           let authResponse = await response.json();
           let accessToken = authResponse.access_token;
-          console.log(response)
+          console.log(accessToken)
         })
         .catch((error) => {
           console.error(error);
         });
 
-        $.ajax({
-          url: "https://cors-anywhere.herokuapp.com/https://api.petfinder.com/v2/animals?key=XlBR3viVn8RGIGcXwVQc7sYBJPFg1PwnPeLNVO9eXBty1nYguo&type=dog&page=2",
-          method: "GET",
-          headers: {
-        "Access-Control-Allow-Origin": "*"
-        
-      }
-          
-        }).then(function(response){
-          console.log(response)
-        })
+       
 
         
     </script>
